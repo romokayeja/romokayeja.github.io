@@ -4,183 +4,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Romokayeja</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #ececec;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            font-family: Arial, sans-serif;
-        }
-
-        .window {
-            width: 400px;
-            height: 600px;
-            background-color: white;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .window-header {
-            height: 40px;
-            background-color: #f2f2f2;
-            border-top-left-radius: 20px;
-            border-top-right-radius: 20px;
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
-            padding-left: 20px;
-            position: relative;
-        }
-
-        .close-button {
-            width: 15px;
-            height: 15px;
-            background-color: red;
-            border-radius: 50%;
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            cursor: pointer;
-        }
-
-        .container {
-            padding: 20px;
-            text-align: center;
-            flex-grow: 1;
-        }
-
-        h1, h2 {
-            color: limegreen;
-        }
-
-        .btn-jugar {
-            background-color: limegreen;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-
-        .dinosaur {
-            display: none;
-            position: absolute;
-            bottom: 20px;
-            left: 100px;
-            width: 50px;
-            height: 50px;
-            background-color: green;
-            border-radius: 50%;
-            animation: run 1s steps(5) infinite;
-        }
-
-        @keyframes run {
-            0% { background-position: 0; }
-            100% { background-position: -250px; }
-        }
-
-        /* Jumping animation for the dinosaur */
-        .jump {
-            animation: jump 0.5s ease-out forwards;
-        }
-
-        @keyframes jump {
-            0% { bottom: 20px; }
-            50% { bottom: 100px; }
-            100% { bottom: 20px; }
-        }
-
-        /* Style for the desktop */
-        .desktop {
-            display: none;
-            width: 100%;
-            height: 100%;
-            background-color: #f0f0f0;
-            position: relative;
-            padding-top: 20px;
-            text-align: center;
-        }
-
-        .close-desktop-button {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background-color: red;
-            color: white;
-            padding: 10px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="window" id="window">
-    <div class="window-header">
-        <div class="close-button" onclick="closeWindow()"></div>
+    <!-- Barra superior estilo macOS -->
+    <div class="macos-bar">
+        <div class="macos-logo" onclick="toggleMenu()">Romokayeja</div>
+        <div class="macos-menu" id="macosMenu">
+            <ul>
+                <li onclick="openAbout()">Acerca de Nosotros</li>
+                <li onclick="closeTab()">Salir</li>
+                <li onclick="openContact()">Contacto</li>
+            </ul>
+        </div>
     </div>
-    <div class="container">
-        <h1>Romokayeja</h1>
-        <h2>Acerca de nosotros</h2>
-        <p>Somos un negocio en la ciudad de Guachochi, cuyo dueño es Jaime Álvarez.</p>
-        <p>Número de teléfono: <strong>+52 6491077081</strong></p>
-        <p>Dirección: Calle Belisario Domínguez, Colonia Los Pinos.</p>
-        <p>Desarrollado y compilado por <strong>El Lobo.</strong></p>
-        <p>Contacto del desarrollador: <strong>+52 6491068609.</strong></p>
-        <button class="btn-jugar" onclick="startGame()">Jugar</button>
+
+    <!-- Ventana "Acerca de Nosotros" -->
+    <div class="window" id="aboutWindow" onmousedown="startMove(event)">
+        <div class="window-header">
+            <div class="close-button" onclick="closeAboutWindow()"></div>
+        </div>
+        <div class="container">
+            <h1>Romokayeja</h1>
+            <h2>Acerca de nosotros</h2>
+            <p>Somos un negocio en la ciudad de Guachochi, cuyo dueño es Jaime Álvarez.</p>
+            <p>Número de teléfono: <strong>+52 6491077081</strong></p>
+            <p>Dirección: Calle Belisario Domínguez, Colonia Los Pinos.</p>
+            <p>Desarrollado y compilado por <strong>El Lobo.</strong></p>
+            <p>Contacto del desarrollador: <strong>+52 6491068609.</strong></p>
+        </div>
     </div>
-</div>
 
-<div class="dinosaur" id="dinosaur"></div>
+    <!-- Ventana de contacto -->
+    <div class="window" id="contactWindow" onmousedown="startMove(event)">
+        <div class="window-header">
+            <div class="close-button" onclick="closeContactWindow()"></div>
+        </div>
+        <div class="container">
+            <h1>Contactos</h1>
+            <p><strong>Contacto del desarrollador:</strong> +52 6491068609</p>
+            <p><strong>Contacto del administrador:</strong> +52 6491077081</p>
+        </div>
+    </div>
 
-<!-- Desktop content -->
-<div class="desktop" id="desktop">
-    <button class="close-desktop-button" onclick="closeDesktop()">Cerrar</button>
-    <h1>Bienvenido al Escritorio</h1>
-    <p>Haz clic en "Jugar" para comenzar el juego.</p>
-</div>
-
-<script>
-    function closeWindow() {
-        document.querySelector('.window').style.display = 'none';
-        document.getElementById('desktop').style.display = 'block'; // Show the desktop after closing the window
-    }
-
-    function startGame() {
-        document.querySelector('.container').style.display = 'none'; // Hide the window content
-        document.getElementById('dinosaur').style.display = 'block'; // Show the dinosaur
-        document.body.addEventListener('click', jumpDinosaur);
-        document.body.addEventListener('keydown', function(e) {
-            if (e.key === ' ' || e.code === 'Space') { // Space key
-                jumpDinosaur();
-            }
-        });
-    }
-
-    function jumpDinosaur() {
-        const dinosaur = document.getElementById('dinosaur');
-        dinosaur.classList.add('jump');
-        setTimeout(() => {
-            dinosaur.classList.remove('jump');
-        }, 500); // Duration of the jump animation
-    }
-
-    function closeDesktop() {
-        document.getElementById('desktop').style.display = 'none'; // Hide the desktop
-        document.body.innerHTML = ''; // Clear the entire content to "close" everything
-    }
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
