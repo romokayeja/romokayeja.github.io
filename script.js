@@ -1,50 +1,58 @@
-// Function to toggle the visibility of the macOS menu
 function toggleMenu() {
-    const menu = document.getElementById('macosMenu');
-    menu.style.display = (menu.style.display === 'block') ? 'none' : 'block';
+    const menu = document.getElementId('macosMenu');
+    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
-// Function to open the "Acerca de Nosotros" window
 function openAbout() {
-    document.getElementById('aboutWindow').style.display = 'flex'; // Show the About window
-    document.getElementById('macosMenu').style.display = 'none';  // Hide the menu
+    const aboutWindow = document.getElementById('aboutWindow');
+    aboutWindow.style.display = 'block';
 }
 
-// Function to close the "Acerca de Nosotros" window
 function closeAboutWindow() {
-    document.getElementById('aboutWindow').style.display = 'none'; // Hide the About window
+    const aboutWindow = document.getElementById('aboutWindow');
+    aboutWindow.style.display = 'none';
 }
 
-// Function to close the tab (Simulates clicking "Salir")
+function minimizeWindow(windowId) {
+    const windowElement = document.getElementById(windowId);
+    windowElement.style.display = 'none';
+}
+
+function maximizeWindow(windowId) {
+    const windowElement = document.getElementById(windowId);
+    windowElement.style.width = '100%';
+    windowElement.style.height = '100%';
+    windowElement.style.top = '0';
+    windowElement.style.left = '0';
+    windowElement.style.transform = 'none';
+}
+
 function closeTab() {
-    window.close(); // Close the current browser tab
+    window.close();
 }
-
-// Function to open the "Contacto" window
-function openContact() {
-    document.getElementById('contactWindow').style.display = 'flex'; // Show the Contact window
-    document.getElementById('macosMenu').style.display = 'none';  // Hide the menu
-}
-
-// Function to close the "Contacto" window
-function closeContactWindow() {
-    document.getElementById('contactWindow').style.display = 'none'; // Hide the Contact window
-}
-
-// Allow dragging the window like macOS
-let isMoving = false;
-let offsetX, offsetY;
 
 function startMove(event) {
-    isMoving = true;
-    offsetX = event.clientX - event.target.getBoundingClientRect().left;
-    offsetY = event.clientY - event.target.getBoundingClientRect().top;
+    const windowElement = event.target.closest('.window');
+    let shiftX = event.clientX - windowElement.getBoundingClientRect().left;
+    let shiftY = event.clientY - windowElement.getBoundingClientRect().top;
 
-    document.addEventListener('mousemove', moveWindow);
-    document.addEventListener('mouseup', stopMove);
+    function moveAt(pageX, pageY) {
+        windowElement.style.left = pageX - shiftX + 'px';
+        windowElement.style.top = pageY - shiftY + 'px';
+    }
+
+    function onMouseMove(event) {
+        moveAt(event.pageX, event.pageY);
+    }
+
+    document.addEventListener('mousemove', onMouseMove);
+
+    windowElement.onmouseup = function() {
+        document.removeEventListener('mousemove', onMouseMove);
+        windowElement.onmouseup = null;
+    };
 }
 
-function moveWindow(event) {
-    if (!isMoving) return;
-    const windowElement = event.target.closest('.window');
-    windowElement.style.left = `${event.clientX - offsetX
+document.querySelectorAll('.window').forEach(windowElement => {
+    windowElement.addEventListener('mousedown', startMove);
+});
