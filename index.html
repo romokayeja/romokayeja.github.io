@@ -23,28 +23,17 @@
     <!-- Ventana "Acerca de Nosotros" -->
     <div class="window" id="aboutWindow" onmousedown="startMove(event)">
         <div class="window-header">
-            <div class="close-button" onclick="closeAboutWindow()"></div>
+            <div class="window-buttons">
+                <div class="close-button" onclick="closeAboutWindow()"></div>
+                <div class="minimize-button" onclick="minimizeWindow('aboutWindow')"></div>
+                <div class="maximize-button" onclick="maximizeWindow('aboutWindow')"></div>
+            </div>
         </div>
         <div class="container">
             <h1>Romokayeja</h1>
             <h2>Acerca de nosotros</h2>
-            <p>Somos un negocio en la ciudad de Guachochi, cuyo dueño es Jaime Álvarez.</p>
+            <p>Romokayeja es una tienda de abarrotes cuyo propietario es el señor Jaime Álvarez Chaparro. Estamos ubicados en Calle Belisario Domínguez, Colonia Los Pinos, Guachochi.</p>
             <p>Número de teléfono: <strong>+52 6491077081</strong></p>
-            <p>Dirección: Calle Belisario Domínguez, Colonia Los Pinos.</p>
-            <p>Desarrollado y compilado por <strong>El Lobo.</strong></p>
-            <p>Contacto del desarrollador: <strong>+52 6491068609.</strong></p>
-        </div>
-    </div>
-
-    <!-- Ventana de contacto -->
-    <div class="window" id="contactWindow" onmousedown="startMove(event)">
-        <div class="window-header">
-            <div class="close-button" onclick="closeContactWindow()"></div>
-        </div>
-        <div class="container">
-            <h1>Contactos</h1>
-            <p><strong>Contacto del desarrollador:</strong> +52 6491068609</p>
-            <p><strong>Contacto del administrador:</strong> +52 6491077081</p>
         </div>
     </div>
 
