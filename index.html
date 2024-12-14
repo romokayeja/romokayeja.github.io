@@ -98,11 +98,35 @@
             50% { bottom: 100px; }
             100% { bottom: 20px; }
         }
+
+        /* Style for the desktop */
+        .desktop {
+            display: none;
+            width: 100%;
+            height: 100%;
+            background-color: #f0f0f0;
+            position: relative;
+            padding-top: 20px;
+            text-align: center;
+        }
+
+        .close-desktop-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
 
-<div class="window">
+<div class="window" id="window">
     <div class="window-header">
         <div class="close-button" onclick="closeWindow()"></div>
     </div>
@@ -120,9 +144,17 @@
 
 <div class="dinosaur" id="dinosaur"></div>
 
+<!-- Desktop content -->
+<div class="desktop" id="desktop">
+    <button class="close-desktop-button" onclick="closeDesktop()">Cerrar</button>
+    <h1>Bienvenido al Escritorio</h1>
+    <p>Haz clic en "Jugar" para comenzar el juego.</p>
+</div>
+
 <script>
     function closeWindow() {
         document.querySelector('.window').style.display = 'none';
+        document.getElementById('desktop').style.display = 'block'; // Show the desktop after closing the window
     }
 
     function startGame() {
@@ -142,6 +174,11 @@
         setTimeout(() => {
             dinosaur.classList.remove('jump');
         }, 500); // Duration of the jump animation
+    }
+
+    function closeDesktop() {
+        document.getElementById('desktop').style.display = 'none'; // Hide the desktop
+        document.body.innerHTML = ''; // Clear the entire content to "close" everything
     }
 </script>
 
