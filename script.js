@@ -1,5 +1,5 @@
 function toggleMenu() {
-    const menu = document.getElementId('macosMenu');
+    const menu = document.getElementById('macosMenu');
     menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
 }
 
