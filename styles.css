@@ -1,86 +1,35 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-image: url('background.jpg');
-    background-size: cover;
-    background-position: center;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Romokayeja</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
 
-.macos-bar {
-    background-color: rgba(248, 248, 248, 0.8);
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-}
+    <!-- Barra superior estilo macOS -->
+    <div class="macos-bar">
+        <div class="macos-logo">Bienvenido</div>
+    </div>
 
-.macos-logo {
-    font-weight: bold;
-    cursor: pointer;
-}
+    <!-- Ventana "Acerca de Nosotros" -->
+    <div class="window" id="aboutWindow">
+        <div class="window-header">
+            <div class="window-buttons">
+                <div class="close-button" onclick="closeAboutWindow()"></div>
+                <div class="minimize-button" onclick="minimizeWindow('aboutWindow')"></div>
+                <div class="maximize-button" onclick="maximizeWindow('aboutWindow')"></div>
+            </div>
+        </div>
+        <div class="container">
+            <h1>Romokayeja</h1>
+            <h2>Acerca de nosotros</h2>
+            <p>Romokayeja es una tienda de abarrotes cuyo propietario es el señor Jaime Álvarez Chaparro. Estamos ubicados en Calle Belisario Domínguez, Colonia Los Pinos, Guachochi.</p>
+            <p>Número de teléfono: <strong>+52 6491077081</strong></p>
+        </div>
+    </div>
 
-.macos-menu ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-
-.macos-menu li {
-    margin-left: 20px;
-    cursor: pointer;
-}
-
-.window {
-    position: absolute;
-    width: 400px;
-    border: 1px solid #ddd;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    display: none;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-}
-
-.window-header {
-    background-color: rgba(248, 248, 248, 0.8);
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    border-bottom: 1px solid #ddd;
-    border-top-left-radius: 10px;
-    border-top-right-radius: 10px;
-}
-
-.window-buttons {
-    display: flex;
-    gap: 5px;
-}
-
-.close-button, .minimize-button, .maximize-button {
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
-.close-button {
-    background-color: red;
-}
-
-.minimize-button {
-    background-color: yellow;
-}
-
-.maximize-button {
-    background-color: green;
-}
-
-.container {
-    padding: 20px;
-}
+    <script src="script.js"></script>
+</body>
+</html>
